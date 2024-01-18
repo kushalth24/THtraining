@@ -6,7 +6,6 @@
 
 // Declaration
 
-
 // "const" does NOT define a constant array. It defines a constant reference to an array.
 // Because of this, we can still change the elements of a constant array.
 // An array declared with const must be initialized when it is declared.
@@ -55,7 +54,7 @@ const person = { firstName: "John", lastName: "Doe", age: 46 };
 // JavaScript variables can be objects. Arrays are special kinds of objects.
 // Because of this, you can have variables of different types in the same Array.
 // You can have objects in an Array. You can have functions in an Array. You can have arrays in an Array:
-const myArray=[];
+const myArray = [];
 myArray[0] = Date.now;
 myArray[1] = myFunction;
 myArray[2] = myCars;
@@ -85,20 +84,18 @@ text += "</ul>";
 function myFunction(value) {
   text += "<li>" + value + "</li>";
 }
-function myCars(){
-
-}
+function myCars() {}
 console.log(text);
 
 //------------------------------------------------------------
 //JavaScript does not support arrays with named indexes.
-// In JavaScript, arrays use numbered indexes.  
+// In JavaScript, arrays use numbered indexes.
 // In JavaScript, objects use named indexes.
 
 // Create an array with one element:
 const points1 = [40];
 // Create an array with 40 undefined elements:
-const points2 = new Array(40);  
+const points2 = new Array(40);
 console.log(points1);
 console.log(points2);
 console.log(Array.isArray(points1));
@@ -107,13 +104,13 @@ console.log(points1 instanceof Array);
 //---------------------------------------------------------
 
 //Array Methods:
-let c= array2.at(2);
+let c = array2.at(2);
 console.log(c);
-let jointArrayString=array1.join("*");
+let jointArrayString = array1.join("*");
 console.log(jointArrayString);
 array3.push("nine");
 console.log(array3);
-let newLengthOf_array3=array3.push("ten");
+let newLengthOf_array3 = array3.push("ten");
 console.log(newLengthOf_array3);
 array3.pop();
 console.log(array3);
@@ -130,28 +127,32 @@ array3.unshift("seven");
 console.log(array3);
 delete array3[2];
 console.log(array3);
-array3[5]="this will create holes";
+array3[5] = "this will create holes";
 console.log(array3);
 
 //The concat() method does not change the existing arrays. It always returns a new array.
-const concatenatedArray=array1.concat(array2);
+const concatenatedArray = array1.concat(array2);
 console.log(concatenatedArray);
 
 const myArrayNew = ["Emil", "Tobias", "Linus"];
-const myChildren = myArrayNew.concat("Peter","Fernandese"); 
+const myChildren = myArrayNew.concat("Peter", "Fernandese");
 console.log(myChildren);
 
 //to index (2-1)-->1 from index 0, to all the array
-fruits.copyWithin(2,0);
+fruits.copyWithin(2, 0);
 //copy elements from 0 to (2-1) at position 3
 fruits.push("Strawberry", "Guauva");
-fruits.copyWithin(2,0,3);
-const myArr = [[1,2],[3,4],[5,6]];
+fruits.copyWithin(2, 0, 3);
+const myArr = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
 const newArr = myArr.flat();
 console.log(newArr);
 
 // The splice() method adds new items to an array.
-// array.splice(a,b,comma-separated elements); 
+// array.splice(a,b,comma-separated elements);
 // a is position where addition take place
 // comma separated elements will be inserted at position a.
 // after all elements insertion, next b elements will be deleted.
@@ -166,7 +167,7 @@ fruits2.slice(3);
 console.log(fruits2);
 // this will take two args, first is starting and second is ending.
 // from starting to (end-1) index, elements will be remained, everyone else will removed.
-const citrus = fruits.slice(1,4);
+const citrus = fruits.slice(1, 4);
 console.log(citrus);
 
 //--------------------------------------------------------------------
@@ -178,29 +179,97 @@ console.log(citrus);
 let position = fruits.indexOf("Apple") + 1;
 console.log(position);
 // array.lastIndexOf(element to be found, start-> from which index to start search) returns last index of element in array
- 
-console.log(fruits.includes("Apple"));// checks that elements is present or not
+
+console.log(fruits.includes("Apple")); // checks that elements is present or not
 
 //find()- element that satisfies the condition
-//findIndex() -  element index in array that satisfies the condition 
+//findIndex() -  element index in array that satisfies the condition
 const numbers = [4, 9, 16, 25, 29];
-let first = numbers.findIndex(myFunction);
+let first = numbers.findIndex(myFunction4);
 
-function myFunction(value, index, array) {
+function myFunction4(value, index, array) {
   return value > 18;
 }
 console.log(first);
 //findLast() - last element that satisfies the condition
 //findLastIndex() - last element index that satisfies the condition
 const temp = [27, 28, 30, 40, 42, 35, 30];
-let pos = temp.findLast(x => x > 40);
+let pos = temp.findLast((x) => x > 40);
 console.log(pos);
 
-// sorting 
+// sorting
+// .sort() --> this is for not numbers
+const arrayToBeSorted = ["apple", "banana", "Banana", "guava", "watermelon"];
+arrayToBeSorted.sort();
+console.log(arrayToBeSorted);
+arrayToBeSorted.reverse(); //self explanatory
+arrayToBeSorted.sort().reverse(); // reverse sort
+const sortedArray = arrayToBeSorted.toSorted();
+console.log(sortedArray);
+const reversedArray = sortedArray.toReversed();
+console.log(reversedArray);
+// for numeric sort
+const numberArray = [40, 100, 1, 5, 25, 10];
+numberArray.sort(function (a, b) {
+  return a - b;
+});
+console.log(numberArray);
+// b-a for reverse sort
 
+// shuffle the array in random order
+arrayToBeSorted.sort(function () {
+  return 0.5 - Math.random();
+});
 
+//Math.min.apply(null, [1, 2, 3]) is equivalent to Math.min(1, 2, 3).
+//Math.max.apply(null, [1, 2, 3]) is equivalent to Math.max(1, 2, 3).
 
+// sorting objects
+const cars3 = [
+  { type: "Volvo", year: 2016 },
+  { type: "Saab", year: 2001 },
+  { type: "BMW", year: 2010 },
+];
+cars3.sort(function (a, b) {
+  return a.year - b.year;
+});
 
+// Iteration
 
+const numbers1 = [45, 4, 9, 16, 25];
+const numbers2 = numbers1.map(myFunction3);
 
+function myFunction3(value) {
+  return value * 2;
+}
+console.log(numbers2);
+
+const arrayToBeFlatmap = [1, 2, 3, 4, 5, 6];
+const flatMappedArray = arrayToBeFlatmap.flatMap((x) => x * 2);
+console.log(flatMappedArray);
+
+const nonfilteredArray = [45, 4, 9, 16, 25];
+const filteredArray = nonfilteredArray.filter(myFunction2);
+
+function myFunction2(value) {
+  return value > 18;
+}
+console.log(filteredArray);
+
+// array.reduce(myfunction, initial value)-> this operates over whole array and gives one value.
+// array.every(myfunction)-> this gives true/false based on every elements pass the required condition or not
+// array.some(myfunction)-> this gives true/false based on some element/s pass the required condition or not
+// Array.from(object)-> returns the array made from the object (string to characters)
+// const keys=arrayName.keys(); here keys variable is iterator of array arrayName.
+// for(let x of keys){console.log(x);}
+// const entry=arrayName.entries() -> gives entries in key-value format
+const months = ["Januar", "Februar", "Mar", "April"];
+const myMonths = months.with(2, "March");// safe way to update array elements
+console.log(myMonths);
+const q1 = ["Jan", "Feb", "Mar"];
+const q2 = ["Apr", "May", "Jun"];
+const q3 = ["Jul", "Aug", "Sep"];
+const q4 = ["Oct", "Nov", "May"];
+const year = [...q1, ...q2, ...q3, ...q4];
+console.log(year);
 
