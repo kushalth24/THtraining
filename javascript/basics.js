@@ -196,7 +196,7 @@ console.log(first);
 const temp = [27, 28, 30, 40, 42, 35, 30];
 let pos = temp.findLast((x) => x > 40);
 console.log(pos);
-
+//----------------------------------------------------------
 // sorting
 // .sort() --> this is for not numbers
 const arrayToBeSorted = ["apple", "banana", "Banana", "guava", "watermelon"];
@@ -264,7 +264,7 @@ console.log(filteredArray);
 // for(let x of keys){console.log(x);}
 // const entry=arrayName.entries() -> gives entries in key-value format
 const months = ["Januar", "Februar", "Mar", "April"];
-const myMonths = months.with(2, "March");// safe way to update array elements
+const myMonths = months.with(2, "March"); // safe way to update array elements
 console.log(myMonths);
 const q1 = ["Jan", "Feb", "Mar"];
 const q2 = ["Apr", "May", "Jun"];
@@ -272,4 +272,313 @@ const q3 = ["Jul", "Aug", "Sep"];
 const q4 = ["Oct", "Nov", "May"];
 const year = [...q1, ...q2, ...q3, ...q4];
 console.log(year);
+//--------------------------------------------------------------------
+//JS objects
+// objects has properties and methods.. eg. car-> property:color, brand ; method: can start, can run
+const individual = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue",
+  fullName: function () {
+    return this.firstName + " " + this.lastName; // this is keyword
+  },
+};
+const firstNameOfIndividual = individual.firstName; // access property by '.'
+const firstNameOfIndividual1 = individual["firstName"]; // access property by '[" "]'
+const fullNameOfIndividual = individual.fullName(); // return full name
+const fullNameOfIndividual1 = individual.fullName; // return the function definition-> function() { return this.firstName + " " + this.lastName; }
+const x = individual;
+x.lastName = "Patel";
+console.log(individual.lastName);
+delete individual.fullName;
+// for..in loop
+let allAboutIndividual = "";
+for (let x in individual) {
+  allAboutIndividual += person[x];
+}
+console.log(allAboutIndividual);
 
+// JavaScript objects inherit the properties of their prototype.
+// The delete keyword does not delete inherited properties, but if you delete a prototype property, it will affect all objects inherited from the prototype.
+
+console.log(individual);
+// other methods to print object
+// for..in loop
+const objectArray = Object.values(individual);
+console.log(objectArray);
+const stringifiedObject = JSON.stringify(individual); // converts Dates to String
+// if individual contains any method, converts it to string before stringify individual.
+console.log(stringifiedObject);
+
+// getters and setters
+const person1 = {
+  firstName: "John",
+  lastName: "Doe",
+  language: "",
+  set lang(lang) {
+    this.language = lang;
+  },
+  get fullName() {
+    return this.firstName + " " + this.lastName;
+  },
+};
+person1.lang = "en";
+console.log(person1.language);
+console.log(person1.fullName);
+
+// new String()    // A new String object
+// new Number()    // A new Number object
+// new Boolean()   // A new Boolean object
+// new Object()    // A new Object object
+// new Array()     // A new Array object
+// new RegExp()    // A new RegExp object
+// new Function()  // A new Function object
+// new Date()      // A new Date object
+// Use string literals "" instead of new String().
+// Use number literals 50 instead of new Number().
+// Use boolean literals true / false instead of new Boolean().
+// Use object literals {} instead of new Object().
+// Use array literals [] instead of new Array().
+// Use pattern literals /()/ instead of new RegExp().
+// Use function expressions () {} instead of new Function().
+
+// The JavaScript prototype property allows you to add new properties to object constructors:
+function Person(first, last, age, eyecolor) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eyecolor;
+}
+
+Person.prototype.nationality = "English";
+Person.prototype.name = function () {
+  return this.firstName + " " + this.lastName;
+};
+//--------------------------------------------------------
+//Iterables
+//  for(const x of object){
+//    //code
+//  }
+
+// let iterator2 = myNumbers[Symbol.iterator2]();
+
+// while (true) {
+//   const result = iterator2.next();
+//   if (result.done) break;
+//   // Any Code Here
+// }
+
+//Sets and Maps
+const letters = new Set(["a","b","c"]);
+const myIterator = letters.values();// iterator to iterate over set letters.
+// set.keys() set.entries() for accessing keys and entries , typeof , instanceof
+// List all entries
+let tex = "";
+letters.forEach (function(value) {
+  tex += value;
+})
+console.log(tex);
+
+// maps are same as maps in java
+// new Map()	Creates a new Map object
+// set()	Sets the value for a key in a Map
+// get()	Gets the value for a key in a Map
+// clear()	Removes all the elements from a Map
+// delete()	Removes a Map element specified by a key
+// has()	Returns true if a key exists in a Map
+// forEach()	Invokes a callback for each key/value pair in a Map
+// entries()	Returns an iterator object with the [key, value] pairs in a Map
+// keys()	Returns an iterator object with the keys in a Map
+// values()	Returns an iterator object of the values in a Map
+
+// for (const x of fruits.keys()) { //-> fruits.values(), fruits.entries() can be used
+//   text += x;
+// }
+
+// set.add(value) method used to add values to set
+// Functions
+
+// defined by function keyword. can be assigned to a particular variable, in that case we don't need to name the function. They can be used in a expression
+// self invoking functions
+(function () {
+  let x = "Hello!!";  // I will invoke myself
+})();
+
+//arguments.length gives number of arguments in function
+// arrow functions function --> const x=(a,b)=>{return a*b}, they are not hoisted and can't use this keyword.
+// JavaScript function definitions do not specify data types for parameters.
+// JavaScript functions do not perform type checking on the passed arguments.
+// JavaScript functions do not check the number of arguments received.
+// in case of missing arguments
+function missing(x=10, y) { //-->x is a default parameter
+  if (y === undefined) {
+    y = 2;
+  }
+  console.log(y);
+}
+missing();
+function findMax() {
+  let max = -Infinity;
+  for(let i = 0; i < arguments.length; i++) {
+    if (arguments[i] > max) {
+      max = arguments[i];
+    }
+  }
+  return max;
+} 
+console.log(findMax(1,6,7,4,3,5,));
+
+//person.fullName.call(person1, "Oslo", "Norway");
+// this is for object person having fullName key having a function as a value
+
+// call() and apply()
+const per = {
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+}
+const person111 = {
+  firstName: "Mary",
+  lastName: "Doe"
+}
+// This will return "Mary Doe":
+per.fullName.apply(person111);
+
+const pers = {
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+}
+const person11 = {
+  firstName:"John",
+  lastName: "Doe"
+}
+const person22 = {
+  firstName:"Mary",
+  lastName: "Doe"
+}
+// This will return "John Doe":
+pers.fullName.call(person11);
+
+// The call() method takes arguments separately.
+// The apply() method takes arguments as an array.
+
+//bind()
+// const person = {
+//   firstName:"John",
+//   lastName: "Doe",
+//   fullName: function () {
+//     return this.firstName + " " + this.lastName;
+//   }
+// }
+// const member = {
+//   firstName:"Hege",
+//   lastName: "Nilsen",
+// }
+// let fullName = person.fullName.bind(member);
+
+//--------------------------------------------------------------------
+// Scopes in JS
+// local, global, block
+var globalVariable = "I'm in global scope";
+
+function myFunction() {
+  var localVariable = "I'm in local scope";
+  console.log(localVariable);
+  // This function can access globalVariable
+  console.log(globalVariable);
+  var globalVariable = "global changed"; // global variable will change for only this function.
+  // console.log(globalVariable);
+}
+
+myFunction();
+console.log(globalVariable);
+// Variables in local scope are typically declared within functions, conditional statements, loops, or other code blocks.
+//In local scope, variables are typically defined within a function, while block scope is created within code blocks like if, for, or while statements.
+// function checkCondition() {
+//   let result = "Before condition";
+//   if (true) {
+//     let result = "Inside condition"; // Block-scoped variable
+//   }
+//   console.log(result); // "Before condition" from the outer scope
+// }
+// function exampleBlockScope() {
+//   if (true) {
+//     let blockVariable = "I'm block-scoped with 'let'";
+//     const constantBlockVar = "I'm block-scoped with 'const'";
+//   }
+//   console.log(blockVariable); // Error: blockVariable is not defined
+//   console.log(constantBlockVar); // Error: constantBlockVar is not defined
+// }
+// function myFunction() {
+//   if (true) {
+//     var localVariable = "I'm in block scope";
+//     let blockVariable = "I'm also in block scope";
+//   }
+//   console.log(localVariable); // Accessible
+//   console.log(blockVariable); // Error: blockVariable is not defined
+// }
+
+// Nested scope
+var xx = 10;
+
+function outer() {
+  var xx = 20;
+
+  function inner() {
+    var xx = 30;
+    console.log(xx); // Accesses x from the innermost scope (x = 30)
+  }
+
+  inner();
+  console.log(xx); // Accesses x from the outer scope (x = 20)
+}
+
+outer();
+console.log(xx); // Accesses x from the global scope (x = 10)
+
+// When outerFunction is called and assigned to the closure variable, it retains access to outerVariable even after outerFunction has completed.
+
+// This is the essence of a closure: the inner function remembers the scope in which it was created and can access its variables even when the outer function has finished executing.
+function outerFunction() {
+  var outerVariable = "I'm in outerFunction";
+
+  function innerFunction() {
+    console.log(outerVariable); // Accesses outerVariable from the outer scope
+  }
+
+  return innerFunction;
+}
+
+var closure = outerFunction();
+closure(); // This still has access to outerVariable
+
+//------------------------------------------------------
+// hoisting
+console.log(asdfasdfas);
+var asdfasdfas = "";
+//---------------------------------------------------------
+// Spread Operator
+let arrayOne = [1, 2, 3];
+let arrayTwo = [4, 5];
+arrCombined = [...arrayOne, ...arrayTwo];
+console.log(arrCombined);
+let arrayThree = [arrCombined, "c", "d"];
+console.log(arrayThree);
+console.log(Math.min(...arrCombined));
+// we can merge objects as well with spread operator
+
+// Rest operator
+function func(...input) {
+  let sum = 0;
+  for (let i of input) {
+    sum += i;
+  }
+  return sum;
+}
+console.log(func(1, 2)); //3
+console.log(func(1, 2, 3)); //6
+console.log(func(1, 2, 3, 4, 5)); //15
+
+//------------------------------------------------------------
