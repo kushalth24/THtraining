@@ -1,32 +1,21 @@
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState, useCallback, useContext } from 'react';
 import './App.css';
+import FunctionComponentContext from './FunctionComponentContext';
 
+export const ThemeContext=React.createContext();
 
 function App() {
-  const[name, setName]=useState("");
-  // const renderCount=useRef(1);
-  // useEffect(()=>{
-  //   renderCount.current=renderCount.current+1;
-  // })
-  //-----------------------------------------
-  // const inputRef=useRef();
-  // function focus(){
-  //   inputRef.current.focus();
-  // }
-  //-------------------------------------------abc
-  const prevName=useRef();
-  useEffect(()=>{
-    prevName.current=name;
-  },[name])
+  const [darkTheme,setDarkTheme]=useState(true);
+  function toggleTheme(){
+    setDarkTheme(prevDarkTheme=> !prevDarkTheme)
+  }
   return (
     <div className="App">
-      {/* <input ref={inputRef} value={name} onChange={e=>setName(e.target.value)}/> */}
-      <input value={name} onChange={e=>setName(e.target.value)}/>
-      {/* <div>My name is {name}</div> */}
-      {/* <div> I rendered {renderCount.current} times </div> */}
-      {/* <button onClick={focus}>Focus</button> */}
-      <div>My name is {name} and it used to be {prevName.current}</div>
+      <ThemeContext.Provider value={darkTheme}>
+        <button onClick={toggleTheme}>Toggle Theme</button>
+        <FunctionComponentContext/>
+      </ThemeContext.Provider>
     </div>
   );
 }
