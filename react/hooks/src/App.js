@@ -3,17 +3,16 @@ import React, { useEffect, useMemo, useRef, useState, useCallback, useContext } 
 import './App.css';
 import FunctionComponentContext from './components/FunctionComponentContext';
 import useLocalStorage from './customHooks/useLocalStorage';
+import axios from 'axios';
 
-export const ThemeContext=React.createContext();
 
 function App() {
-  const[name, setName]=useLocalStorage('name',"");
+  useEffect(()=>{
+    axios.get(`https://reqres.in/api/users?page=2`).then((res)=>{console.log(res)})
+  })
+  
   return (
-    <input
-    type='text'
-    value={name}
-    onChange={(e)=>{setName(e.target.value)}}
-    />
+    <h1>Axios Tutorial</h1>
   );
 }
 
